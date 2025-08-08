@@ -1,0 +1,269 @@
+/* src/index.css */
+:root {
+  --primary-blue: #007bff;
+  --dark-bg: #282c34;
+  --dark-surface: #3a3f4b;
+  --light-bg: #ffffff;
+  --light-surface: #f8f9fa;
+  --text-light: #ffffff;
+  --text-dark: #212529;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --fair-color: #ffc107;
+  --poor-color: #dc3545;
+  --good-color: #28a745;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-container {
+  padding: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- Login Page --- */
+.login-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+.login-banner {
+  width: 40%;
+  background: linear-gradient(to bottom right, #0d1a2e, #00c6ff);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+.login-banner h1 {
+    font-size: 2.5rem;
+}
+.login-form-container {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-bg);
+}
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.login-form img {
+    display: block;
+    margin: 0 auto 2rem auto;
+    width: 60px;
+}
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    margin-top: 1rem;
+}
+.btn-secondary:hover {
+    background-color: #e6f2ff;
+}
+
+/* --- General Table Styles --- */
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+th {
+  background-color: var(--light-surface);
+  font-weight: 600;
+}
+tbody tr:last-child td {
+    border-bottom: none;
+}
+tbody tr:hover {
+    background-color: #f1f3f5;
+}
+.status-fair {
+    background-color: var(--fair-color);
+    color: var(--text-dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* --- Dashboard/Header Styles --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--light-surface);
+    border-bottom: 1px solid var(--border-color);
+}
+.header-logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+}
+.header-actions button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.dashboard-actions .btn {
+    width: auto;
+}
+
+/* --- Report Page --- */
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+.card {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+.card p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* --- Map View --- */
+.map-view-container {
+    display: flex;
+    height: calc(100vh - 150px); /* Adjust height as needed */
+    gap: 1.5rem;
+}
+.map-filters {
+    flex: 0 0 280px;
+    padding: 1.5rem;
+    background: var(--light-surface);
+    border-radius: 8px;
+    overflow-y: auto;
+}
+.map-filters h4 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+.filter-group div {
+    margin-bottom: 0.5rem;
+}
+.map-display {
+    flex-grow: 1;
+    background-image: url('./assets/map-background.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* --- Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+}
