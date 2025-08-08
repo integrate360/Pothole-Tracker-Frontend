@@ -1,122 +1,88 @@
-import React, { useState } from "react";
-import "../styles/AssignTaskModal.css";
-import { FaUser, FaSearch, FaUserCircle, FaPaperPlane } from "react-icons/fa";
+// src/components/AssignTaskModal.jsx
+import React from 'react';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import '../styles/AssignTaskModal.css';
+import { FiX, FiPlus, FiSearch } from 'react-icons/fi';
 
-// --- DUMMY DATA ---
 const users = [
-  { id: 1, name: "Vinit", code: "RV_897992_SP" },
-  { id: 2, name: "Saquib", code: "RV_698025_MA" },
-  { id: 3, name: "Shubham kanojia", code: "RV_173009_CV" },
-  { id: 4, name: "suri", code: "RV_608552_BU" },
-  { id: 5, name: "suryanshu", code: "RV_152552_XR" },
-  { id: 6, name: "suri", code: "RV_485175_GN" },
+    { name: 'Vinit', id: 'RV_897992_SP' },
+    { name: 'Saquib', id: 'RV_698025_MA' },
+    { name: 'Shubham kanojia', id: 'RV_173009_CV' },
+    { name: 'suri', id: 'RV_608552_BU' },
+    { name: 'suryanshu', id: 'RV_152552_XR' },
+    { name: 'suri', id: 'RV_485175_GN' },
 ];
 
-// The Modal Component
 const AssignTaskModal = ({ isOpen, onClose }) => {
-  const [selectedUser, setSelectedUser] = useState(null);
+    if (!isOpen) return null;
 
-  // This prevents the modal from rendering if it's not open
-  if (!isOpen) {
-    return null;
-  }
+    const newDelhiPosition = [28.6139, 77.2090];
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {/* --- MODAL HEADER --- */}
-        <div className="modal-header">
-          <h2>Assign User Survey Task</h2>
-          <div className="assignee-info">
-            <FaUserCircle />
-            <span>Assigne by Nikhil Vyas</span>
-          </div>
-        </div>
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="assign-task-modal-content" onClick={e => e.stopPropagation()}>
+                <header className="assign-task-modal-header">
+                    <h2>Assign User Survey Task</h2>
+                    <div className="assign-by">
+                        Assign by Nikhil Vyas
+                        <div className="profile-avatar-small">A</div>
+                    </div>
+                </header>
+                <div className="assign-task-modal-body">
+                    <div className="form-column user-column">
+                        <div className="user-selection-section">
+                            <label>Select a user for this task</label>
+                            <div className="user-search-box">
+                                <FiSearch />
+                                <input type="text" placeholder="Search for a users" />
+                            </div>
+                            <div className="user-list">
+                                {users.map(user => (
+                                    <label key={user.id} className="user-list-item">
+                                        <input type="checkbox" /> {user.name} ({user.id})
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                        <button className="cancel-btn" onClick={onClose}>Cancel</button>
+                    </div>
+                    <div className="form-column fields-column">
+                        <div className="form-fields">
+                            <label>Starting Point</label>
+                            <input type="text" defaultValue="New Delhi, Delhi, India" />
 
-        {/* --- MODAL BODY (2-column layout) --- */}
-        <div className="modal-body">
-          {/* --- LEFT COLUMN: USER SELECTION --- */}
-          <div className="user-selection-column">
-            <h4>Select a user for this task</h4>
-            <div className="user-search-container">
-              <FaSearch className="user-search-icon" />
-              <input type="text" placeholder="Search for a users" />
+                            <label>Ending Point</label>
+                            <input type="text" defaultValue="Lado Sarai, New Delhi, Delhi, India" />
+                            
+                            <label>Number of Lanes</label>
+                            <input type="text" />
+
+                            <label>Task Title</label>
+                            <input type="text" />
+
+                            <label>Task Description</label>
+                            <textarea rows="3"></textarea>
+                            
+                            <label>Due Date</label>
+                            <input type="date" placeholder="Select date"/>
+                        </div>
+                    </div>
+                    <div className="map-column">
+                         <MapContainer center={newDelhiPosition} zoom={11} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
+                            <TileLayer
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            />
+                        </MapContainer>
+                    </div>
+                </div>
+                 <footer className="assign-task-modal-footer">
+                    <button className="assign-btn"><FiPlus /> Assign</button>
+                </footer>
             </div>
-            <ul className="user-list">
-              {users.map((user) => (
-                <li
-                  key={user.id}
-                  className={selectedUser === user.id ? "selected" : ""}
-                  onClick={() => setSelectedUser(user.id)}
-                >
-                  <FaUser className="user-list-icon" />
-                  {user.name} ({user.code})
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* --- RIGHT COLUMN: FORM & MAP --- */}
-          <div className="task-details-column">
-            <div className="form-and-map-layout">
-              <div className="form-fields">
-                <div className="form-group">
-                  <label htmlFor="startPoint">Starting Point</label>
-                  <input
-                    type="text"
-                    id="startPoint"
-                    defaultValue="New Delhi, Delhi, India"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="endPoint">Ending Point</label>
-                  <input
-                    type="text"
-                    id="endPoint"
-                    defaultValue="Lado Sarai, New Delhi, Delhi, India"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lanes">Number of Lanes</label>
-                  <input type="text" id="lanes" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="taskTitle">Task Title</label>
-                  <input type="text" id="taskTitle" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="taskDesc">Task Description</label>
-                  <textarea id="taskDesc" rows="3"></textarea>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="dueDate">Due Date</label>
-                  <input type="date" id="dueDate" />
-                </div>
-              </div>
-              <div className="map-placeholder-container">
-                {/* This would be replaced with a real map component */}
-                <img
-                  src="https://i.imgur.com/GZ5vjJQ.png"
-                  alt="Map of New Delhi"
-                  className="map-image"
-                />
-              </div>
-            </div>
-          </div>
         </div>
-
-        {/* --- MODAL FOOTER --- */}
-        <div className="modal-footer">
-          <button className="btn btn-cancel" onClick={onClose}>
-            Cancel
-          </button>
-          <button className="btn btn-assign">
-            <FaPaperPlane /> Assign
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default AssignTaskModal;

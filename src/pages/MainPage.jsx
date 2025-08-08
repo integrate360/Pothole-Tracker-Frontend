@@ -63,6 +63,8 @@ const MainPage = () => {
   const handleContinueMap = () => {
     navigate("/multimap");
   };
+  const handleManageUser = () => navigate("/manageuser");
+  const handleViewTask = () => navigate("/viewtask");
 
   return (
     <div className="main-page-container">
@@ -90,10 +92,10 @@ const MainPage = () => {
             <p>Select one or multiple locations to view on the map</p>
           </div>
           <div className="action-buttons">
-            <button className="action-btn">
+            <button className="action-btn" onClick={handleManageUser}>
               <FiUsers className="btn-icon" /> User
             </button>
-            <button className="action-btn">
+            <button className="action-btn" onClick={handleViewTask}>
               <FiCheckSquare className="btn-icon" /> Task
             </button>
             <button className="action-btn" onClick={handleContinue}>

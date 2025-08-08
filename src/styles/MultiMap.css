@@ -1,3 +1,5 @@
+/* src/styles/MultiMap.css */
+
 .gis-page {
   position: relative;
   width: 100vw;
@@ -16,7 +18,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 1rem;
-  z-index: 1001; /* Must be above map panes */
+  z-index: 1001;
   border-right: 1px solid #e0e0e0;
 }
 .nav-logo { width: 40px; margin-bottom: 2rem; }
@@ -30,11 +32,40 @@
   height: 100%;
   width: 280px;
   background-color: #fff;
-  padding: 1.5rem;
-  z-index: 1001; /* Must be above map panes */
+  padding: 0; /* Remove padding to let tabs go to the edge */
+  z-index: 1001;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
+}
+
+/* --- NEW: Tab Styles --- */
+.filter-tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+.tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+}
+.tab-btn.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+/* --- END NEW: Tab Styles --- */
+
+.tab-content {
+  padding: 1.5rem;
+  overflow-y: auto;
 }
 
 .filter-group { margin-bottom: 1.5rem; }
@@ -47,7 +78,7 @@
 }
 .filter-group input[type="checkbox"] {
   margin-right: 0.75rem;
-  accent-color: #007bff; /* Modern way to color checkboxes */
+  accent-color: #007bff;
 }
 
 /* Custom checkbox colors for legend */
@@ -62,30 +93,26 @@
   font-weight: 600;
   color: #6c757d;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
 /* --- Map Area Container --- */
 .map-area-container {
   position: absolute;
-  left: 0; /* Map will now be under the panels */
+  left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 10; /* Base layer */
+  z-index: 10;
 }
-
-/* This is needed so map controls (zoom) appear correctly */
 .leaflet-container {
   font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
-
 .map-controls {
     position: absolute;
     bottom: 2rem;
-    left: 360px; /* Position relative to the filter panels */
-    z-index: 1001; /* Must be above map panes */
+    left: 360px;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -107,7 +134,7 @@
   height: 100%;
   width: 400px;
   background-color: #fff;
-  z-index: 1001; /* Must be above map panes */
+  z-index: 1001;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
