@@ -6,6 +6,7 @@ import FinalReportPage from "./pages/FinalReportPage";
 import MultiMap from "./pages/MultiMap";
 import Home from "./pages/Home";
 import Budget from "./pages/Budget";
+import AssignTaskModal from "./pages/AssignTaskModal";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/finalreport" element={<FinalReportPage />} />
         <Route path="/multimap" element={<MultiMap />} />
         <Route path="/budgetCalculator" element={<Budget />} />
+        <Route path="/assigntask" element={<AssignTaskModal />} />
       </Routes>
     </div>
   );
